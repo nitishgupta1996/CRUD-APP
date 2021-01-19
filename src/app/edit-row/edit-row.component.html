@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="form-row">
+
+        <div class="form-group col-md-3">
+            <label>Name</label>
+            <input maxlength="30" placeholder="name" type="text" class="form-control" [(ngModel)]="editableData.name">
+        </div>
+        <div class="form-group col-md-3">
+            <label>Age</label>
+            <input type="number" placeholder="age" class="form-control" [(ngModel)]="editableData.age">
+        </div>
+        <div class="form-group col-md-3">
+            <label>Email</label>
+            <input maxlength="50" type="email" placeholder="email" class="form-control" [(ngModel)]="editableData.email">
+        </div>
+        <div class="form-group col-md-3">
+            <label>Country</label>
+            <input maxlength="20" type="text" placeholder="country" class="form-control" [(ngModel)]="editableData.country">
+        </div>
+
+    </div>
+    <button class="btn btn-primary" (click)="onSave()" style="margin-right: 5px;">Save</button>
+    <button class="btn btn-danger" (click)="onCancelEdit()">Cancel</button>
+</div>

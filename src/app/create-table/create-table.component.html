@@ -1,0 +1,46 @@
+<div class="container" *ngIf="!isNewRow ">
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <input type="text" class="form-control" placeholder="Filter Search..." [(ngModel)]="searchTerm">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-success" style="margin-right: 5px;" (click)="isNewRow = true">Add</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <br>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th (click)="sortColumns('name')">Name <span class="caret"></span></th>
+                        <th (click)="sortColumns('age')">Age <span class="caret"></span></th>
+                        <th (click)="sortColumns('email')">Email <span class="caret"></span></th>
+                        <th (click)="sortColumns('country')">Country <span class="caret"></span></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let row of (rows | filterTable: searchTerm | sort:sortColumn:reverse); let i = index">
+                    <tr>
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.age }}</td>
+                        <td>{{ row.email }}</td>
+                        <td>{{ row.country }}</td>
+                        <td>
+                            <button class="btn btn-primary" style="margin-right: 5px;" (click)="isEdit = true; onEdit(row, i)">Edit</button>
+                            <button class="btn btn-danger" (click)="onDelete(i)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <app-edit-row [editData]="editData" *ngIf="isEdit" (saveEdit)="onEditSubmit($event)" (cancelEdit)="onCancel()"></app-edit-row>
+</div>
+<app-add-row (addedRow)="onAddSubmit($event)" *ngIf="isNewRow" (cancelAdd)="onCancel()"></app-add-row>
